@@ -1,0 +1,49 @@
+﻿<section>
+    <!---------------------------------------- Modal-Start ------------------------------------------------>
+    <div class="modal fade" id="CREATE_HOUSEHOLD" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><b>Create Household</b></h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Household Name</label>
+                            <input type="text" class="form-control" placeholder="Enter name" ng-model="home.model.Name">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="submit" class="btn btn-success btn-block" ng-click="home.createHousehold()">Create Household</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------------------------------------- Modal-End -------------------------------------------------->
+    <h2>Dashboard</h2><hr /><br />
+    <div class="row">
+        <div class="col-xs-4">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#CREATE_HOUSEHOLD">New Household</button>
+        </div>
+    </div><br />
+    <div class="row">
+        <div class="col-xs-4">
+            <button class="btn btn-primary" ng-click="home.getHouseholdNameById()">Get Household Name</button>
+        </div>
+        <div class="col-xs-8">
+            {{home.householdName}}
+        </div>
+    </div><br />
+    <div class="row">
+        <div class="col-xs-4">
+            <button class="btn btn-primary" ng-click="home.getHouseholdMembers()">Get Household Members</button>
+        </div>
+        <div class="col-xs-8">
+            <div ng-repeat="h in home.members">
+                {{h.FirstName}} {{h.LastName}}
+            </div>
+        </div>
+    </div><br />
+</section>

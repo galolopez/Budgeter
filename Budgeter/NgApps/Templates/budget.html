@@ -1,0 +1,308 @@
+﻿<section class="container">
+    <!---------------------------------------- Modal-Start ------------------------------------------------>
+    <div class="modal fade" id="CREATE_BUDGET" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><b>Create Budget</b></h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Budget Name</label>
+                            <input type="text" class="form-control" placeholder="Enter name" ng-model="budget.model.Name">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="submit" class="btn btn-success btn-block" ng-click="budget.createBudget()">Create Budget</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div class="modal fade" id="CREATE_ITEM" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3><b>Create Item</b></h3>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Item Name</label>
+                            <input type="text" ng-model="budget.itemModel.Name" class="form-control" id="itemName" placeholder="Enter Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Net Amount</label>
+                            <input type="text" ng-model="budget.itemModel.Amount" class="form-control" id="itemAmount" placeholder="Enter Amount">
+                        </div>
+                        <div class="form-group">
+                            <label>Category Type</label>
+                            <select ng-options="category.Id as category.Name for category in budget.categories" ng-model="budget.itemModel.CategoryId" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="submit" class="btn btn-success btn-block" ng-click="budget.createItem(budget.currentItemId)">Create Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="CREATE_CATEGORY" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3><b>Create Category</b></h3>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Category Name</label>
+                            <input type="text" ng-model="budget.categoryModel.Name" class="form-control" id="categoryName" placeholder="Category Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Category Type</label>
+                            <select ng-options="o.v as o.n for o in [{ n: 'Income', v: false }, { n: 'Expense', v: true }]" ng-model="budget.categoryModel.ExpenseTF" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="submit" class="btn btn-success btn-block" ng-click="budget.createCategory()">Create Category</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EDIT_BUDGET" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3><b>Edit Budget</b></h3>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" ng-model="budget.model.Name" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="submit" class="btn btn-danger btn-block" ng-click="budget.editBudget()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EDIT_ITEM" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3><b>Edit Item</b></h3>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" ng-model="budget.itemModel.Name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="text" ng-model="budget.itemModel.Amount" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Category Type</label>
+                            <select ng-options="category.Id as category.Name for category in budget.categories" ng-model="budget.itemModel.CategoryId" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="submit" class="btn btn-danger btn-block" ng-click="budget.editItem()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EDIT_CATEGORY" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3><b>Edit Category</b></h3>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" ng-model="budget.categoryModel.Name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Expense Type</label>
+                            <select ng-options="o.v as o.n for o in [{ n: 'Income', v: false }, { n: 'Expense', v: true }]" ng-model="budget.categoryModel.ExpenseTF" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="submit" class="btn btn-danger btn-block" ng-click="budget.editCategory()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="DELETE_BUDGET" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3>Would you like to delete budget <b>{{budget.model.Name}}</b>?</h3>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger" ng-click="budget.deleteBudget(budget.currentBudgetId)">Yes</button>
+                    <button data-dismiss="modal" class="btn btn-primary">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="DELETE_ITEM" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3>Would you like to delete category <b>{{budget.categoryModel.Name}}</b>?</h3>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger" ng-click="budget.deleteCategory(budget.currentCategoryId)">Yes</button>
+                    <button data-dismiss="modal" class="btn btn-primary">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="DELETE_CATEGORY" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3>Would you like to delete category <b>{{budget.categoryModel.Name}}</b>?</h3>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger" ng-click="budget.deleteCategory(budget.currentCategoryId)">Yes</button>
+                    <button data-dismiss="modal" class="btn btn-primary">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!---------------------------------------- Modal-End -------------------------------------------------->
+    <!------------------------------------- BUDGETS & ITEMS ----------------------------------------------->
+    <section style="padding-top: 50px">
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button type="button" class="btn btn-primary btn-lg" id="myBtn" data-toggle="modal" data-target="#CREATE_BUDGET">New Budget</button><br /><br />
+                            </div>
+                            <div class="col-sm-4 col-sm-offset-1">
+                                <center><p style="font-weight: bold; font-size: x-large"><b>BUDGETS</b></p></center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="nav nav-tabs">
+                            <li ng-repeat="b in budget.budgets">
+                                <a href="" ng-click="budget.getBudget(b.Id); budget.getItems(b.Id)" data-toggle="tab">{{b.Name}}</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade active in" id="content">
+                                <div class="panel panel-primary">
+                                    <p>Budget Balance: </p>
+                                    <a class="btn btn-default" data-toggle="modal" data-target="#EDIT_BUDGET"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit Budget"></span></a>
+                                    <a class="btn btn-default" data-toggle="modal" data-target="#DELETE_BUDGET"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Budget"></span></a>
+                                </div>
+                                <form class="form-horizontal" role="form" style="padding-top: 30px">
+                                    <div class="form-group">
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CREATE_ITEM">New Item</button><br /><br />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary" ng-click="budget.deleteBudget(budget.currentBudgetId)">Delete Budget</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#EDIT_BUDGET">Edit Budget</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>
+                                            Item
+                                        </th>
+                                        <th>
+                                            Amount
+                                        </th>
+                                        <th>
+                                            Category
+                                        </th>
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                    <tr ng-repeat="i in budget.items">
+                                        <td>{{i.Name}}</td>
+                                        <td>{{i.Amount | currency : symbol : fractionSize}}</td>
+                                        <td>{{i.CategoryId}}</td>
+                                        <td>
+                                            <a class="btn btn-default" ng-click="budget.getItem(i.Id)" data-toggle="modal" data-target="#EDIT_ITEM"><span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit Item"></span></a>
+                                            <a class="btn btn-default" ng-click="budget.deleteItem(i.Id)"><span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Item"></span></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#CREATE_CATEGORY">New</button><br /><br />
+                            </div>
+                            <div class="col-sm-4 col-sm-offset-1">
+                                <center><p style="font-weight: bold; font-size: x-large"><b>CATEGORIES</b></p></center>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-hover">
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Expense
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                        <tr ng-repeat="c in budget.categories">
+                            <td>{{c.Name}}</td>
+                            <td>{{c.ExpenseTF}}</td>
+                            <td>
+                                <a class="btn btn-default" ng-click="budget.getCategory(c.Id)" title="Edit Category" data-toggle="modal" data-target="#EDIT_CATEGORY"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                <a class="btn btn-default" ng-click="budget.getCategory(c.Id)" title="Delete Category" data-toggle="modal" data-target="#DELETE_CATEGORY"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!---------------------------------------- CATEGORIES ---------------------------------------------------->
+    <section style="padding-top: 20px">
+    </section><hr />
+</section>

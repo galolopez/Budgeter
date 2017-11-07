@@ -1,0 +1,101 @@
+﻿<section>
+    <div class="container body-content">
+        <div ng-app="BudgetApp">
+            <div ng-controller="accountsCtrl">
+                <h1>Accounts</h1><hr />
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div id="login-wrapper">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        Create Account
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <!--<form ng-submit="accounts.createAccount()" role="form">
+                                        <div class="form-group" style="padding-bottom: 40px">
+                                            <div class="col-md-6">
+                                                <input type="text" ng-model="accounts.model.Name" class="form-control" id="account" placeholder="Account Name" required autofocus>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" id="balance" ng-model="accounts.model.Balance" class="form-control" placeholder="Balance" required>
+                                            </div>
+                                        </div>                                        
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <button class="btn btn-primary btn-block" type="submit">Create Account</button>
+                                            </div>
+                                        </div>
+                                    </form>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><br />
+                <div class="panel panel-primary" ng-controller="ModalDemoCtrl">
+                    <div class="panel-heading">
+                        <center><p style="font-weight: bold; font-size: x-large"><b>ACCOUNTS</b></p></center>
+                    </div>
+                    <table class="table table-hover">
+                        <tr>
+                            <th>
+                                Account
+                            </th>
+                            <th>
+                                Balance
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                        <tr ng-repeat="a in accounts.accts">
+                            <td>{{a.Name}}</td>
+                            <td>${{a.Balance}}</td>
+                            <td>
+                                <a class="btn btn-default" ng-click="open()">
+                                    <!--accounts.editAccount(a.Id)-->
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit Account"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div>
+                    <div>
+                        <script type="text/ng-template" id="myModalContent.html">
+                            <div ng-controller="accountsCtrl">
+                                <div class="modal-header">
+                                    <div ng-repeat="a in accounts.accts">
+                                        <h3 class="modal-title">Edit Account: {{a.Name}}</h3>
+                                    </div>                                    
+                                </div>
+                                <div class="modal-body">
+                                    <form ng-submit="accounts.createAccount()" role="form">
+                                        <div class="form-group" style="padding-bottom: 40px">
+                                            <div class="col-md-6">
+                                                <input type="text" ng-model="accounts.model.Name" class="form-control" id="account" placeholder="Account Name" required autofocus>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" id="balance" ng-model="accounts.model.Balance" class="form-control" placeholder="Balance" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <button class="btn btn-primary" type="submit">Create Account</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="button" ng-click="ok()">Save</button>
+                                    <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+                                </div>
+                            </div>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

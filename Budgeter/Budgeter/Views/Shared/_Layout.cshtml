@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "BudgetMe";
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<link href="~/Content/ui-bootstrap-csp.css" rel="stylesheet" />
+    <link href="~/Scripts/angular-chart/angular-chart.css" rel="stylesheet" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />*@
+    <link rel="shortcut icon" href="~/Images/money.png" />
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse,.sidebar-nav.nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("BudgetMe", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Accounts", "Account", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Transactions", "Transaction", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Households", "Household", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - BudgetMe App</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-ui-router.min.js"></script>
+    <script src="~/Scripts/angular-local-storage.min.js"></script>
+    <script src="~/Scripts/angular-resource.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/Scripts/angular-chart/angular-chart.min.js"></script>
+
+    <script src="~/NgApps/app.js"></script>
+    <script src="~/NgApps/Controllers/chart.js"></script>
+    <script src="~/NgApps/Services/authSvc.js"></script>
+    <script src="~/NgApps/Services/authIntercepterSvc.js"></script>
+    <script src="~/NgApps/Controllers/homeCtrl.js"></script>
+    <script src="~/NgApps/Controllers/loginCtrl.js"></script>
+    <script src="~/NgApps/Controllers/menuCtrl.js"></script>
+    <script src="~/NgApps/Controllers/registerCtrl.js"></script>
+</body>
+</html>

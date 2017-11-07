@@ -1,0 +1,79 @@
+﻿<section class="container">
+    <h1>Bugets</h1><hr />
+    
+    <div class="row">
+        <div class="panel-body">
+            <form class="form-horizontal" ng-click="budget.createBudget()" role="form">
+                <div class="form-group">
+                    <div class="col-md-2">                        
+                        <button class="btn btn-primary" ng-click="budget.createBudget()">Create Budget</button>
+                        <!--<input type="text" ng-model="budget.model.HouseholdId" class="form-control" id="budget" placeholder="Household Id" required autofocus>-->
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="budget.model.Name" class="form-control" id="budget" placeholder="Budget Name"><br />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <center><p style="font-weight: bold; font-size: x-large"><b>BUDGETS</b></p></center>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Budget
+                </th>
+                <th>
+                    Items
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            <tr ng-repeat="b in budget.budgets">
+                <td>{{b.Name}}</td>
+                <td></td>
+                <td>
+                    <a class="btn btn-default" ng-click="open()">
+                        <!--accounts.editAccount(a.Id)-->
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true" title="Edit Account"></span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div><hr />
+    <h1>Items</h1><hr />
+    <div class="row">
+        <div class="panel-body">
+            <form class="form-horizontal" ng-click="budget.createItem()" role="form">
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" ng-click="budget.createItem()">Create Item</button>
+                        <!--<input type="text" ng-model="budget.model.HouseholdId" class="form-control" id="budget" placeholder="Household Id" required autofocus>-->
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" ng-model="budget.itemModel.Name" class="form-control" id="budget" placeholder="Item Name"><br />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <center><p style="font-weight: bold; font-size: x-large"><b>ITEMS</b></p></center>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Item
+                </th>
+            </tr>
+            <tr ng-repeat="i in budget.items">
+                <td>{{i.Name}}</td>
+            </tr>
+        </table>
+    </div><hr />
+
+</section>
