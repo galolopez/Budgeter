@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace Budgeter.Controllers
 {
+    /// <summary>
+    /// The budget controller
+    /// </summary>
     public class BudgetController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();

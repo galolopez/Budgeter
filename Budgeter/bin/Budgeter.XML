@@ -254,6 +254,31 @@
             Initializes a new instance of the <see cref="T:Budgeter.Areas.HelpPage.HelpPageSampleGenerator"/> class.
             </summary>
         </member>
+        <member name="P:Budgeter.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:Budgeter.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:Budgeter.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:Budgeter.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:Budgeter.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
         <member name="M:Budgeter.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
             <summary>
             Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
@@ -326,31 +351,6 @@
             <param name="type">The type.</param>
             <param name="mediaType">Type of the media.</param>
             <returns></returns>
-        </member>
-        <member name="P:Budgeter.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
-            <summary>
-            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
-            </summary>
-        </member>
-        <member name="P:Budgeter.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
-            <summary>
-            Gets the objects that are used directly as samples for certain actions.
-            </summary>
-        </member>
-        <member name="P:Budgeter.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
-            <summary>
-            Gets the objects that are serialized as samples by the supported formatters.
-            </summary>
-        </member>
-        <member name="P:Budgeter.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
-            <summary>
-            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
-            stopping when the factory successfully returns a non-<see langref="null"/> object.
-            </summary>
-            <remarks>
-            Collection includes just <see cref="M:Budgeter.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
-            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
-            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
         </member>
         <member name="T:Budgeter.Areas.HelpPage.HelpPageSampleKey">
             <summary>
@@ -589,6 +589,11 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="T:Budgeter.Controllers.BudgetController">
+            <summary>
+            The budget controller
+            </summary>
+        </member>
         <member name="M:Budgeter.Controllers.BudgetController.GetBudgets(System.Int32)">
             <summary>
             Gets all the budgets for a single household id.
@@ -620,11 +625,16 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="T:Budgeter.Controllers.CategoryController">
+            <summary>
+            The categories controller
+            </summary>
+        </member>
         <member name="M:Budgeter.Controllers.CategoryController.GetCategoriesByHouseholdId(System.Int32)">
             <summary>
             Gets all the categories by a household name.
             </summary>
-            <param name="name"></param>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:Budgeter.Controllers.CategoryController.Get(System.Int32)">
@@ -638,13 +648,13 @@
             <summary>
             Creates a category, given a name.
             </summary>
-            <param name="name"></param>
+            <param name="c"></param>
         </member>
         <member name="M:Budgeter.Controllers.CategoryController.Edit(Budgeter.Models.Category)">
             <summary>
             Edits a category, given a name.
             </summary>
-            <param name="name"></param>
+            <param name="c"></param>
         </member>
         <member name="M:Budgeter.Controllers.CategoryController.Delete(System.Int32)">
             <summary>
@@ -687,6 +697,11 @@
             Leaves a household, given a user id. 
             </summary>
             <param name="u"></param>
+        </member>
+        <member name="T:Budgeter.Controllers.ItemController">
+            <summary>
+            The items controller
+            </summary>
         </member>
         <member name="M:Budgeter.Controllers.ItemController.GetItemsByBudgetId(System.Int32)">
             <summary>

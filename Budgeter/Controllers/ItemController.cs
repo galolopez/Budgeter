@@ -1,6 +1,7 @@
 ﻿using Budgeter.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,9 @@ using System.Web.Http;
 
 namespace Budgeter.Controllers
 {
+    /// <summary>
+    /// The items controller
+    /// </summary>
     public class ItemController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -19,11 +23,11 @@ namespace Budgeter.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [ActionName("All")]
-        public IEnumerable<Item> GetItemsByBudgetId(int id)
+        public List<Item> GetItemsByBudgetId(int id)
         {
-            return db.Database.SqlQuery<Item>("EXEC GetItemsByBudgetId @id", new SqlParameter("id", id));
+            return db.Database.SqlQuery<Item>("EXEC GetItemsByBudgetId @id", new SqlParameter("id", id)).ToList();
         }
 
         /// <summary>

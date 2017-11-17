@@ -1,38 +1,44 @@
 ﻿'use strict';
 angular.module('BudgetApp').controller('budgetCtrl', ['$http', '$state', 'authSvc', function ($http, $state, authSvc) {
 
-    var self = this;
-    self.currentBudgetId = '';
-    self.currentItemId = '';
-    self.currentCategoryId = '';
-    self.budgets = [];
-    self.items = [];
-    self.categories = [];
-    self.category = '';
-    self.single = '';
-    self.message = '';
-    self.demo = true;
-    self.model = {
+    var vm = this;
+    vm.currentBudgetId = '';
+    vm.currentItemId = '';
+    vm.currentCategoryId = '';
+    vm.budgets = [];
+    vm.items = [];
+    vm.categories = [];
+    vm.category = '';
+    vm.single = '';
+    vm.message = '';
+    vm.demo = true;
+    vm.model = {
         Id: '',
         Name: '',
         householdId: authSvc.authentication.householdId
     }
-    self.itemModel = {
+    vm.itemModel = {
         Id: '',
         Name: '',
         Amount: '',
         BudgetId: '',
         CategoryId: ''
     }
-    self.categoryModel = {
+    vm.categoryModel = {
         Name: '',
         ExpenseTF: '',
         Id: ''
     };
+
+    function setTab(tabId) {
+        vm.activeTabId = tabId;
+    };
+    vm.setTab = setTab;
+
     // **********************************************************************************************************************//
     //                                                        BUDGETS
     // **********************************************************************************************************************//
-    self.getB = function (id) {
+    vm.getB = function (id) {
         $http({
             method: 'GET',
             url: authSvc.serviceBase + '/api/budget',
@@ -42,36 +48,42 @@ angular.module('BudgetApp').controller('budgetCtrl', ['$http', '$state', 'authSv
                 'Household': authSvc.authentication.householdId
             }
         }).then(function (response) {
-            self.single = response.data;
+            vm.single = response.data;
         });
     };
 
-    self.getBudget = function (id) {
-        self.currentBudgetId = id;
+    vm.getBudget = function (id) {
+        vm.currentBudgetId = id;
         return $http.get(authSvc.serviceBase + '/api/budget/Single/' + id).then(function (response) {
-            self.model = response.data;
+            vm.model = response.data;
         });
     };
 
-    self.getBudgets = function () {
+    vm.getBudgets = function () {
         return $http.get(authSvc.serviceBase + '/api/budget/All/' + authSvc.authentication.householdId).then(function (response) {
-            self.budgets = response.data;
+            vm.budgets = response.data;
+            vm.activeTab = vm.budgets[0];
+            vm.activeTabId = vm.activeTab.Id;
+
+            if (vm.activeTabId > 0) {
+                vm.getItemsById(vm.activeTabId);
+            }
         });
     };
 
-    self.createBudget = function () {
-        return $http.post(serviceBase + 'api/budget/Create/', self.model).then(function (response) {
+    vm.createBudget = function () {
+        return $http.post(serviceBase + 'api/budget/Create/', vm.model).then(function (response) {
             return response;
         });
     };
 
-    self.editBudget = function () {
-        return $http.post(serviceBase + 'api/budget/Edit/', self.model).then(function (response) {
+    vm.editBudget = function () {
+        return $http.post(serviceBase + 'api/budget/Edit/', vm.model).then(function (response) {
             return response;
         });
     };
 
-    self.deleteBudget = function (id) {
+    vm.deleteBudget = function (id) {
         return $http.post(serviceBase + 'api/budget/Delete/' + id).then(function (response) {
             return response;
         });
@@ -79,33 +91,35 @@ angular.module('BudgetApp').controller('budgetCtrl', ['$http', '$state', 'authSv
     // **********************************************************************************************************************//
     //                                                        ITEMS
     // **********************************************************************************************************************//
-    self.getItem = function (id) {
+    vm.getItem = function (id) {
         return $http.get(serviceBase + 'api/item/Single/' + id).then(function (response) {
-            self.itemModel = response.data;
+            vm.itemModel = response.data;
         });
     };
 
-    self.getItems = function (id) {
-        self.currentItemId = id;
-        return $http.get(serviceBase + 'api/item/All/' + id).then(function (response) {
-            self.items = response.data;
-        });
+    function getItemsById(id) {
+        return $http.post(serviceBase + 'api/item/All/' + id)
+            .then(
+                (response) => {
+                    vm.items = response.data;
+                });
     };
+    vm.getItemsById = getItemsById;
 
-    self.createItem = function (id) {
-        self.itemModel.BudgetId = id;
-        return $http.post(serviceBase + 'api/item/Create/', self.itemModel).then(function (response) {
+    vm.createItem = function (id) {
+        vm.itemModel.BudgetId = id;
+        return $http.post(serviceBase + 'api/item/Create/', vm.itemModel).then(function (response) {
             return response;
         });
     };
 
-    self.editItem = function () {
-        return $http.post(serviceBase + 'api/item/Edit/', self.itemModel).then(function (response) {
+    vm.editItem = function () {
+        return $http.post(serviceBase + 'api/item/Edit/', vm.itemModel).then(function (response) {
             return response;
         });
     };
 
-    self.deleteItem = function (id) {
+    vm.deleteItem = function (id) {
         return $http.post(serviceBase + 'api/item/Delete/' + id).then(function (response) {
             return response;
         });
@@ -113,38 +127,39 @@ angular.module('BudgetApp').controller('budgetCtrl', ['$http', '$state', 'authSv
     // **********************************************************************************************************************//
     //                                                        CATEGORIES
     // **********************************************************************************************************************//
-    self.getCategory = function (id) {
-        self.currentCategoryId = id;
-        return $http.get(serviceBase + 'api/category/Single/' + id).then(function (response) {
-            self.categoryModel = response.data;
-        });
+    function getCategory(id) {
+        return $http.get(serviceBase + 'api/category/Single/' + id)
+            .then(
+                (response) => {
+                    vm.categoryModel = response.data;
+                });
     };
+    vm.getCategory = getCategory;
 
-    self.getCategories = function () {
+    vm.getCategories = function () {
         return $http.get(serviceBase + 'api/category/All/' + authSvc.authentication.householdId).then(function (response) {
-            self.categories = response.data;
+            vm.categories = response.data;
         });
     };
 
-    self.createCategory = function () {
-        return $http.post(serviceBase + 'api/category/Create', self.categoryModel).then(function (response) {
+    vm.createCategory = function () {
+        return $http.post(serviceBase + 'api/category/Create', vm.categoryModel).then(function (response) {
             return response;
         });
     };
 
-    self.editCategory = function () {
-        return $http.post(serviceBase + 'api/category/Edit/', self.categoryModel).then(function (response) {
+    vm.editCategory = function () {
+        return $http.post(serviceBase + 'api/category/Edit/', vm.categoryModel).then(function (response) {
             return response;
         });
     };
 
-    self.deleteCategory = function (id) {
+    vm.deleteCategory = function (id) {
         return $http.post(serviceBase + 'api/category/Delete/' + id).then(function (response) {
             return response;
         });
     };
 
-    self.getBudgets();
-    self.getCategory();
-    self.getCategories();
+    vm.getBudgets();
+    vm.getCategories();
 }]);

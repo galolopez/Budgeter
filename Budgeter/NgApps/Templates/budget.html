@@ -211,8 +211,8 @@
                     </div>
                     <div class="panel-body">
                         <ul class="nav nav-tabs">
-                            <li ng-repeat="b in budget.budgets">
-                                <a href="" ng-click="budget.getBudget(b.Id); budget.getItems(b.Id)" data-toggle="tab">{{b.Name}}</a>
+                            <li ng-repeat="b in budget.budgets" ng-class="{'selectedTab active': budget.activeTabId === b.Id}">
+                                <a href="" role="tab" ng-click="budget.getItemsById(b.Id); budget.setTab(b.Id)" data-toggle="tab">{{b.Name}}</a>
                             </li>
                         </ul>
                         <div id="myTabContent" class="tab-content">

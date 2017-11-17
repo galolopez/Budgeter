@@ -10,6 +10,9 @@ using System.Web.Http;
 
 namespace Budgeter.Controllers
 {
+    /// <summary>
+    /// The categories controller
+    /// </summary>
     public class CategoryController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,7 +20,7 @@ namespace Budgeter.Controllers
         /// <summary>
         /// Gets all the categories by a household name.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
         [ActionName("All")]
@@ -41,7 +44,7 @@ namespace Budgeter.Controllers
         /// <summary>
         /// Creates a category, given a name.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="c"></param>
         [HttpPost]
         [ActionName("Create")]
         public void Create(Category c)
@@ -55,7 +58,7 @@ namespace Budgeter.Controllers
         /// <summary>
         /// Edits a category, given a name.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="c"></param>
         [HttpPost]
         [ActionName("Edit")]
         public void Edit(Category c)
