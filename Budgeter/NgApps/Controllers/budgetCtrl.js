@@ -7,11 +7,10 @@ angular.module('BudgetApp').controller('budgetCtrl', ['$http', '$state', 'authSv
     vm.currentCategoryId = '';
     vm.budgets = [];
     vm.items = [];
-    vm.categories = [];
-    vm.category = '';
     vm.single = '';
     vm.message = '';
     vm.demo = true;
+
     vm.model = {
         Id: '',
         Name: '',
@@ -24,11 +23,6 @@ angular.module('BudgetApp').controller('budgetCtrl', ['$http', '$state', 'authSv
         BudgetId: '',
         CategoryId: ''
     }
-    vm.categoryModel = {
-        Name: '',
-        ExpenseTF: '',
-        Id: ''
-    };
 
     function setTab(tabId) {
         vm.activeTabId = tabId;
@@ -124,42 +118,6 @@ angular.module('BudgetApp').controller('budgetCtrl', ['$http', '$state', 'authSv
             return response;
         });
     };
-    // **********************************************************************************************************************//
-    //                                                        CATEGORIES
-    // **********************************************************************************************************************//
-    function getCategory(id) {
-        return $http.get(serviceBase + 'api/category/Single/' + id)
-            .then(
-                (response) => {
-                    vm.categoryModel = response.data;
-                });
-    };
-    vm.getCategory = getCategory;
-
-    vm.getCategories = function () {
-        return $http.get(serviceBase + 'api/category/All/' + authSvc.authentication.householdId).then(function (response) {
-            vm.categories = response.data;
-        });
-    };
-
-    vm.createCategory = function () {
-        return $http.post(serviceBase + 'api/category/Create', vm.categoryModel).then(function (response) {
-            return response;
-        });
-    };
-
-    vm.editCategory = function () {
-        return $http.post(serviceBase + 'api/category/Edit/', vm.categoryModel).then(function (response) {
-            return response;
-        });
-    };
-
-    vm.deleteCategory = function (id) {
-        return $http.post(serviceBase + 'api/category/Delete/' + id).then(function (response) {
-            return response;
-        });
-    };
 
     vm.getBudgets();
-    vm.getCategories();
 }]);

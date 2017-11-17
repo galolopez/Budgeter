@@ -1,0 +1,104 @@
+﻿<section class="container" style="padding-top: 50px">
+    <div class="col-sm-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#CREATE_CATEGORY">New</button><br /><br />
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <center><p style="font-weight: bold; font-size: x-large"><b>CATEGORIES</b></p></center>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th class="col-sm-5 col-sm-offset-5">
+                        Expense
+                    </th>
+                    <th class="col-sm-2 col-sm-offset-2">
+                        Action
+                    </th>
+                </tr>
+                <tr ng-repeat="c in categories.categories">
+                    <td>{{c.Name}}</td>
+                    <td>{{c.ExpenseTF}}</td>
+                    <td>
+                        <a class="btn btn-default" ng-click="categories.getCategory(c.Id)" title="Edit Category" data-toggle="modal" data-target="#EDIT_CATEGORY"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                        <a class="btn btn-default" ng-click="categories.getCategory(c.Id)" title="Delete Category" data-toggle="modal" data-target="#DELETE_CATEGORY"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="CREATE_CATEGORY" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3><b>Create Category</b></h3>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Category Name</label>
+                            <input type="text" ng-model="categories.categoryModel.Name" class="form-control" id="categoryName" placeholder="Category Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Category Type</label>
+                            <select ng-options="o.v as o.n for o in [{ n: 'Income', v: false }, { n: 'Expense', v: true }]" ng-model="categories.categoryModel.ExpenseTF" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="submit" class="btn btn-success btn-block" ng-click="categories.createCategory()">Create Category</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="EDIT_CATEGORY" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3><b>Edit Category</b></h3>
+                </div>
+                <div class="modal-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" ng-model="categories.categoryModel.Name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Expense Type</label>
+                            <select ng-options="o.v as o.n for o in [{ n: 'Income', v: false }, { n: 'Expense', v: true }]" ng-model="categories.categoryModel.ExpenseTF" class="form-control"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" type="submit" class="btn btn-danger btn-block" ng-click="categories.editCategory()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="DELETE_CATEGORY" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3>Would you like to delete category <b>{{categories.categoryModel.Name}}</b>?</h3>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger" ng-click="categories.deleteCategory(categories.currentCategoryId)">Yes</button>
+                    <button data-dismiss="modal" class="btn btn-primary">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

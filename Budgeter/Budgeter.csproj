@@ -805,6 +805,7 @@
     <Content Include="NgApps\Components\ModalDemoCtrl.js" />
     <Content Include="NgApps\Controllers\accountsCtrl.js" />
     <Content Include="NgApps\Controllers\budgetCtrl.js" />
+    <Content Include="NgApps\Controllers\categoriesCtrl.js" />
     <Content Include="NgApps\Controllers\chartCtrl.js" />
     <Content Include="NgApps\Controllers\homeCtrl.js" />
     <Content Include="NgApps\Controllers\itemCtrl.js" />
@@ -818,6 +819,7 @@
     <Content Include="NgApps\Services\homeSvc.js" />
     <Content Include="NgApps\Templates\accounts.html" />
     <Content Include="NgApps\Templates\budget.html" />
+    <Content Include="NgApps\Templates\categories.html" />
     <Content Include="NgApps\Templates\home.html" />
     <Content Include="NgApps\Templates\login.html" />
     <Content Include="NgApps\Templates\register.html" />
